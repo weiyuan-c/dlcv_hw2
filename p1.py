@@ -9,7 +9,7 @@ import numpy as np
 from models import generator
 
 # setting seed
-seed = 453543
+seed = 9686468
 random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)
