@@ -84,9 +84,9 @@ if __name__ == '__main__':
     for i in range(5):
         labels = sample[i*200: (i+1)*200]
         sampled_images = diffusion.sample(model, n=len(labels), labels=labels, denoise_time=940)
-    for j in range(100):
-        idx = labels[0].type(torch.int).item()
-        torchvision.utils.save_image(sampled_images[j], os.path.join(cfg.test_dir, f'{idx}_{(j+1):03d}.png'))
-    for j in range(100):
-        idx = labels[-1].type(torch.int).item()
-        torchvision.utils.save_image(sampled_images[j+100], os.path.join(cfg.test_dir, f'{idx}_{(j+1):03d}.png'))
+        for j in range(100):
+            idx = labels[0].type(torch.int).item()
+            torchvision.utils.save_image(sampled_images[j], os.path.join(cfg.test_dir, f'{idx}_{(j+1):03d}.png'))
+        for j in range(100):
+            idx = labels[-1].type(torch.int).item()
+            torchvision.utils.save_image(sampled_images[j+100], os.path.join(cfg.test_dir, f'{idx}_{(j+1):03d}.png'))
