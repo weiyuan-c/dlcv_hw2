@@ -1,0 +1,1 @@
+python3 p3.py --test_dir $1 --csv_dir $2
