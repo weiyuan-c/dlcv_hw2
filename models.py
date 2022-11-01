@@ -315,7 +315,7 @@ class Up(nn.Module):
         return x + emb
 
 
-class UNet_conditional(nn.Module):
+class unet(nn.Module):
     def __init__(self, c_in=3, c_out=3, time_dim=256, num_classes=None, device="cuda"):
         super().__init__()
         self.device = device
@@ -360,15 +360,15 @@ class UNet_conditional(nn.Module):
         x1 = self.inc(x) # 32, 28, 28
         x2 = self.down1(x1, t) # 64, 14, 14
         x2 = self.sa1(x2) 
-        x3 = self.down2(x2, t) # 128, 8, 8
+        x3 = self.down2(x2, t) # 128, 7, 7
         x3 = self.sa2(x3)
 
         x3 = self.bot1(x3)
         x3 = self.bot2(x3)
-        x3 = self.bot3(x3) # 128, 8, 8
+        x3 = self.bot3(x3) # 128, 7, 7
 
         # x = self.up1(x4, x3, t)
-        # x = self.sa4(x3) # 64, 8, 8
+        # x = self.sa4(x3) # 64, 7, 7
         x = self.up2(x3, x2, t)
         x = self.sa5(x)
         x = self.up3(x, x1, t)
