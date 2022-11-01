@@ -1,6 +1,8 @@
 # p1
+wget https://www.dropbox.com/s/jbtr4v8aa00en7h/G6.ckpt?dl=1 -O G.ckpt
 
 # p2
+wget https://www.dropbox.com/s/nnv02wiz2s77zky/diffusion_model.pt?dl=1 -O diffusion_model.pt
 
 # p3
 
