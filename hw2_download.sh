@@ -1,5 +1,5 @@
 # p1
-wget https://www.dropbox.com/s/jbtr4v8aa00en7h/G6.ckpt?dl=1 -O G.ckpt
+wget https://www.dropbox.com/s/yvgvo469w8l48pi/G5_2.ckpt?dl=1 -O G.ckpt
 
 # p2
 wget https://www.dropbox.com/s/xz023tqqdjvpf4u/diffusion.pt?dl=1 -O diffusion_model.pt
