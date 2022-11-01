@@ -7,7 +7,7 @@ import numpy as np
 import logging
 from tqdm import tqdm
 import argparse
-from models import unet
+from models import UNet_conditional
 
 
 # setting seed
@@ -39,7 +39,6 @@ class Diffusion:
         return torch.linspace(self.beta_start, self.beta_end, self.noise_steps)
 
     def sample(self, model, n, labels, cfg_scale=3, denoise_time=1000):
-        logging.info(f"Sampling {n} new images....")
         model.eval()
         with torch.no_grad():
             x = torch.randn((n, 3, self.img_size, self.img_size)).to(self.device)
@@ -58,8 +57,6 @@ class Diffusion:
                     noise = torch.zeros_like(x)
                 x = 1 / torch.sqrt(alpha) * (x - ((1 - alpha) / (torch.sqrt(1 - alpha_hat))) * predicted_noise) + torch.sqrt(beta) * noise
         model.train()
-        # x = (x.clamp(-1, 1) + 1) / 2
-        # x = (x * 255).type(torch.uint8)
         return x
 
 
@@ -75,7 +72,7 @@ if __name__ == '__main__':
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device', device)
-    model = unet(n_class=parser.n_class).to(device)
+    model = UNet_conditional(num_classes=cfg.n_class).to(device)
     model.load_state_dict(torch.load(cfg.weight, map_location=device))
     model.eval()
     diffusion = Diffusion(img_size=cfg.img_size, device=device)
